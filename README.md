@@ -14,7 +14,7 @@ An API for managing books and authors, built using FastAPI, SQLAlchemy, and Pyda
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-repository/book-management-api.git
+git clone https://github.com/d-tomenchuk/book-management-api.git
 cd book-management-api
 ```
 
