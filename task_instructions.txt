@@ -1,0 +1,37 @@
+Need a developer to create a simple REST API for a book 
+management system. The API should handle basic CRUD operations 
+for books and authors.
+Requirements
+
+Build REST API using Python (Flask/FastAPI)
+SQLite database for data storage
+Basic endpoints:
+
+Get all books
+Get book by ID
+Add new book
+Update book details
+Delete book
+Similar endpoints for authors
+
+
+Basic error handling
+Simple documentation
+
+Technical Requirements
+
+Python 3.8+
+RESTful API design
+JSON responses
+Basic input validation
+
+Deliverables
+
+Working API code
+Basic setup instructions
+Example API requests (curl or Postman)
+
+Nice to Have
+
+Unit tests
+Docker setup
