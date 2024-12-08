@@ -1,5 +1,4 @@
-from pydantic import BaseModel, ConfigDict
-from typing import ClassVar
+from pydantic import BaseModel
 
 # Модель для создания нового автора
 class AuthorCreate(BaseModel):
@@ -15,15 +14,9 @@ class BookCreate(BaseModel):
 class AuthorResponse(AuthorCreate):
     id: int
 
-    # Используем ClassVar для конфигурации
-    Config: ClassVar[ConfigDict] = ConfigDict(from_attributes=True)
-
 # Модель для ответа с данными о книге
 class BookResponse(BookCreate):
     id: int
     title: str
     description: str
     author: AuthorResponse
-
-    # Используем ClassVar для конфигурации
-    Config: ClassVar[ConfigDict] = ConfigDict(from_attributes=True)

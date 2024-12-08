@@ -8,7 +8,7 @@ class Author(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
-    books = relationship("Book", back_populates="author")
+    books = relationship("Book", back_populates="author", cascade="all, delete-orphan")
 
 # Модель для книги
 class Book(Base):

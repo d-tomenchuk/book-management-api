@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 from app.main import app
+
 from app import models, database
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -89,6 +90,8 @@ def test_delete_book():
     assert response.status_code == 200
     assert response.json() == {"message": "Book deleted successfully"}
 
-    # Проверим, что книги больше нет
+    # Проверим, что книги больше нет, ожидаем 404
     response = client.get(f"/books/{book_id}")
     assert response.status_code == 404
+    assert response.json() == {"detail": f"Book with ID {book_id} not found"}
+

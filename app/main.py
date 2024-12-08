@@ -23,7 +23,7 @@ def read_authors(db: Session = Depends(database.get_db)):
 def create_book(book: schemas.BookCreate, db: Session = Depends(database.get_db)):
     return crud.create_book(db=db, book=book)
 
-@app.get("/books/", response_model=list[schemas.BookResponse])
+@app.get("/books/", response_model=List[schemas.BookResponse])  # Используем List
 def read_books(db: Session = Depends(database.get_db)):
     return crud.get_books(db=db)
 
