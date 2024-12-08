@@ -1,13 +1,16 @@
+
 # Book Management API
 
-An API for managing books and authors, built using FastAPI, SQLAlchemy, and Pydantic. This project provides functionality to create, read, and update information about books and authors.
+An API for managing books and authors, built using FastAPI, SQLAlchemy, and Pydantic. This project provides functionality to create, read, update, and delete information about books and authors.
 
 ## Technologies
 
 - **FastAPI** — for building the RESTful API.
 - **SQLAlchemy** — for interacting with the database.
 - **Pydantic** — for data validation and working with models.
-- **PostgreSQL** — for storing books and authors data.
+- **SQLite** — for storing books and authors data.
+
+---
 
 ## Installation
 
@@ -34,7 +37,7 @@ pip install -r requirements.txt
 
 ### 4. Set up the database
 
-Create a database (e.g., PostgreSQL) and configure the database connection in the `.env` file.
+The project uses SQLite by default. No additional configuration is required. The SQLite database file will be created automatically when you run the application.
 
 ### 5. Run the application
 
@@ -42,83 +45,100 @@ Create a database (e.g., PostgreSQL) and configure the database connection in th
 uvicorn app.main:app --reload
 ```
 
-The API will be available at: `http://127.0.0.1:8000`.
+The API will be available at: [http://127.0.0.1:8000](http://127.0.0.1:8000).
+
+---
 
 ## Docker Support
 
-If you prefer to run the project inside a Docker container, you can use the provided `Dockerfile` and `docker-compose.yml` file.
+You can also run the application inside a Docker container.
 
-### Running the application with Docker
-
-1. Build the Docker image:
+### 1. Build the Docker image
 
 ```bash
-docker-compose build
+docker build -t book-api .
 ```
 
-2. Run the container:
+### 2. Run the Docker container
 
 ```bash
-docker-compose up
+docker run -d --name book-api -p 8000:8000 book-api
 ```
 
-The application will be accessible at: `http://127.0.0.1:8000`.
+The application will be accessible at: [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
-Docker will automatically set up a PostgreSQL container and configure the database connection for you.
+---
 
-### Stopping the application
+### Docker Compose (Optional)
 
-To stop the application and the containers:
+The project includes a `docker-compose.yml` file for easier setup.
+
+#### 1. Build and run the containers
+
+```bash
+docker-compose up --build
+```
+
+#### 2. Stop and remove the containers
 
 ```bash
 docker-compose down
 ```
 
-## API Endpoints
+---
 
-### /authors
+## Testing the API
 
-- **GET /authors** — Get all authors
-- **POST /authors** — Create a new author
+You can test the API using:
 
-### /books
+### 1. **Pytest**
 
-- **GET /books** — Get all books
-- **POST /books** — Create a new book
-- **GET /books/{id}** — Get book details by ID
-- **PUT /books/{id}** — Update book information
-- **DELETE /books/{id}** — Delete a book
-
-## Sample Requests
-
-### Creating a new author
-
-```bash
-POST /authors
-{
-  "name": "J.K. Rowling"
-}
-```
-
-### Creating a new book
-
-```bash
-POST /books
-{
-  "title": "Harry Potter and the Sorcerer's Stone",
-  "description": "A young wizard's journey begins.",
-  "author_id": 1
-}
-```
-
-## Testing
-
-You can run the tests using `pytest`:
+Run the tests using the following command:
 
 ```bash
 pytest
 ```
 
-## License
+### 2. **Postman**
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
+#### Import API Endpoints
+
+- Create a new collection in Postman.
+- Add the following endpoints:
+
+  **Authors**
+  - `GET /authors` — Get all authors
+  - `POST /authors` — Create a new author
+  
+    Sample Request:
+    ```json
+    {
+      "name": "J.K. Rowling"
+    }
+    ```
+
+  **Books**
+  - `GET /books` — Get all books
+  - `POST /books` — Create a new book
+  
+    Sample Request:
+    ```json
+    {
+      "title": "Harry Potter and the Sorcerer's Stone",
+      "description": "A young wizard's journey begins.",
+      "author_id": 1
+    }
+    ```
+  - `GET /books/{id}` — Get book details by ID
+  - `PUT /books/{id}` — Update book information
+  - `DELETE /books/{id}` — Delete a book
+
+#### 3. Testing in Postman
+
+- Use `POST /authors` to create an author.
+- Use `POST /books` to create a book associated with the author.
+- Test retrieval, updates, and deletions for the created data.
+
+---
+
+
